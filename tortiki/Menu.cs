@@ -151,68 +151,27 @@ namespace tortiki
                                             DopMenu(decor, position = 0);
                                             break;
                                         case 6:
-                                            position = 1;
                                             OrderOut(order, value);
                                             Console.Clear();
-                                            Console.SetCursorPosition(0, 0);
-                                            Console.WriteLine("Спасибо. " +
-                                                "Хотите сделать еще один заказ?");
-                                            Console.SetCursorPosition(3, 1);
-                                            Console.WriteLine("Да");
-                                            Console.SetCursorPosition(3, 2);
-                                            Console.WriteLine("Нет");
-                                            Console.SetCursorPosition(0, position);
-                                            Console.WriteLine("->");
+                                            Console.WriteLine("Ваш заказ принят." +
+                                                "\nЧтобы сделать новый заказ, нажмите Backspace." +
+                                                "\nЧтобы выйти, нажмите Escape.");
                                             while (true)
                                             {
                                                 knopka = Console.ReadKey();
                                                 switch (knopka.Key)
                                                 {
-                                                    case ConsoleKey.DownArrow:
-                                                        if (position < 2)
+                                                    case ConsoleKey.Escape:
                                                         {
-                                                            Console.Clear();
-                                                            Console.SetCursorPosition(0, 0);
-                                                            Console.WriteLine("Спасибо. " +
-                                                                "Хотите сделать еще один заказ?");
-                                                            Console.SetCursorPosition(3, 1);
-                                                            Console.WriteLine("Да");
-                                                            Console.SetCursorPosition(3, 2);
-                                                            Console.WriteLine("Нет");
-                                                            Console.SetCursorPosition(0, position);
-                                                            position++;
-                                                            Console.SetCursorPosition(0, position);
-                                                            Console.WriteLine("->");
+                                                            Environment.Exit(0);
+                                                            break;
                                                         }
-                                                        break;
-                                                    case ConsoleKey.UpArrow:
-                                                        if (position > 1)
-                                                        {
-                                                            Console.Clear();
-                                                            Console.SetCursorPosition(0, 0);
-                                                            Console.WriteLine("Спасибо! " +
-                                                                "Хотите сделать еще один заказ?");
-                                                            Console.SetCursorPosition(3, 1);
-                                                            Console.WriteLine("Да");
-                                                            Console.SetCursorPosition(3, 2);
-                                                            Console.WriteLine("Нет");
-                                                            Console.SetCursorPosition(0, position);
-                                                            position--;
-                                                            Console.SetCursorPosition(0, position);
-                                                            Console.WriteLine("->");
-                                                        }
-                                                        break;
-                                                    case ConsoleKey.Enter:
-                                                        if (position == 1)
+                                                    case ConsoleKey.Backspace:
                                                         {
                                                             Console.Clear();
                                                             MenuOut();
+                                                            break;
                                                         }
-                                                        else if (position == 2)
-                                                        {
-                                                            Environment.Exit(0);
-                                                        }
-                                                        break;
                                                 }
                                             }
                                             break;
@@ -309,7 +268,7 @@ namespace tortiki
         }
         static void OrderOut(string order, int amount)
         {
-            string ordertext = $"\nЗаказ от {DateTime.Now}\n" + $"\tЗаказ: {order}\n\tЦена: {amount} Рублей";
+            string ordertext = $"\nЗаказ от {DateTime.Now}\n" + $"\tЗаказ: {order}\n\tЦена: {amount} рублей";
             if (File.Exists("C:\\Users\\Igor\\Desktop\\Заказ.txt"))
             {
                 File.AppendAllText("C:\\Users\\Igor\\Desktop\\Заказ.txt", ordertext);
