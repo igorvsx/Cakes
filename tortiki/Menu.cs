@@ -154,8 +154,9 @@ namespace tortiki
                                             position = 1;
                                             OrderOut(order, value);
                                             Console.Clear();
-                                            Console.SetCursorPosition(3, 0);
-                                            Console.WriteLine("Хотите сделать еще один заказ?");
+                                            Console.SetCursorPosition(0, 0);
+                                            Console.WriteLine("Спасибо. " +
+                                                "Хотите сделать еще один заказ?");
                                             Console.SetCursorPosition(3, 1);
                                             Console.WriteLine("Да");
                                             Console.SetCursorPosition(3, 2);
@@ -171,8 +172,9 @@ namespace tortiki
                                                         if (position < 2)
                                                         {
                                                             Console.Clear();
-                                                            Console.SetCursorPosition(3, 0);
-                                                            Console.WriteLine("Хотите сделать еще один заказ?");
+                                                            Console.SetCursorPosition(0, 0);
+                                                            Console.WriteLine("Спасибо. " +
+                                                                "Хотите сделать еще один заказ?");
                                                             Console.SetCursorPosition(3, 1);
                                                             Console.WriteLine("Да");
                                                             Console.SetCursorPosition(3, 2);
@@ -187,8 +189,9 @@ namespace tortiki
                                                         if (position > 1)
                                                         {
                                                             Console.Clear();
-                                                            Console.SetCursorPosition(3, 0);
-                                                            Console.WriteLine("Хотите сделать еще один заказ?");
+                                                            Console.SetCursorPosition(0, 0);
+                                                            Console.WriteLine("Спасибо! " +
+                                                                "Хотите сделать еще один заказ?");
                                                             Console.SetCursorPosition(3, 1);
                                                             Console.WriteLine("Да");
                                                             Console.SetCursorPosition(3, 2);
@@ -202,6 +205,7 @@ namespace tortiki
                                                     case ConsoleKey.Enter:
                                                         if (position == 1)
                                                         {
+                                                            Console.Clear();
                                                             MenuOut();
                                                         }
                                                         else if (position == 2)
@@ -216,31 +220,31 @@ namespace tortiki
                                 }
                                 else if (page != 0 && page != 7)
                                 {
-                                    Zakaz x;
+                                    Zakaz sec_menu;
                                     knopka = Console.ReadKey();
                                     if (page == 1)
                                     {
-                                        x = form;
+                                        sec_menu = form;
                                     }
                                     else if (page == 2)
                                     {
-                                        x = size;
+                                        sec_menu = size;
                                     }
                                     else if (page == 3)
                                     {
-                                        x = taste;
+                                        sec_menu = taste;
                                     }
                                     else if (page == 4)
                                     {
-                                        x = sum;
+                                        sec_menu = sum;
                                     }
                                     else if (page == 5)
                                     {
-                                        x = glaze;
+                                        sec_menu = glaze;
                                     }
                                     else
                                     {
-                                        x = decor;
+                                        sec_menu = decor;
                                     }
                                     switch (knopka.Key)
                                     {
@@ -249,7 +253,7 @@ namespace tortiki
                                             {
                                                 Console.Clear();
                                                 position--;
-                                                DopMenu(x, position);
+                                                DopMenu(sec_menu, position);
                                             }
                                             break;
                                         case ConsoleKey.DownArrow:
@@ -257,37 +261,31 @@ namespace tortiki
                                             {
                                                 Console.Clear();
                                                 position++;
-                                                DopMenu(x, position);
+                                                DopMenu(sec_menu, position);
                                             }
                                             break;
                                         case ConsoleKey.Enter:
+                                            Console.SetCursorPosition(1, 5);
+                                            Console.WriteLine("Успешно добавлено");
                                             if (position == 0)
                                             {
-                                                Console.SetCursorPosition(1, 5);
-                                                Console.WriteLine("Успешно добавлено");
-                                                value += x.price[0];
-                                                order += x.part[0] + ", ";
+                                                value += sec_menu.price[0];
+                                                order += sec_menu.part[0] + ", ";
                                             }
                                             else if (position == 1)
                                             {
-                                                Console.SetCursorPosition(1, 5);
-                                                Console.WriteLine("Успешно добавлено");
-                                                value += x.price[1];
-                                                order += x.part[1] + ", ";
+                                                value += sec_menu.price[1];
+                                                order += sec_menu.part[1] + ", ";
                                             }
                                             else if (position == 2)
                                             {
-                                                Console.SetCursorPosition(1, 5);
-                                                Console.WriteLine("Успешно добавлено");
-                                                value += x.price[2];
-                                                order += x.part[2] + ", ";
+                                                value += sec_menu.price[2];
+                                                order += sec_menu.part[2] + ", ";
                                             }
                                             else if (position == 3)
                                             {
-                                                Console.SetCursorPosition(1, 5);
-                                                Console.WriteLine("Успешно добавлено");
-                                                value += x.price[3];
-                                                order += x.part[3] + ", ";
+                                                value += sec_menu.price[3];
+                                                order += sec_menu.part[3] + ", ";
                                             }
                                             break;
                                     }
@@ -311,7 +309,6 @@ namespace tortiki
         }
         static void OrderOut(string order, int amount)
         {
-            Console.Clear();
             string ordertext = $"\nЗаказ от {DateTime.Now}\n" + $"\tЗаказ: {order}\n\tЦена: {amount} Рублей";
             if (File.Exists("C:\\Users\\Igor\\Desktop\\Заказ.txt"))
             {
