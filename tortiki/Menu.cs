@@ -24,7 +24,7 @@ namespace tortiki
                 Console.WriteLine(item);
                 point++;
             }
-            Console.WriteLine("-------------------");
+            Console.WriteLine("-----------------------");
             Console.SetCursorPosition(3, 8);
             Console.WriteLine($"Сумма заказа: {value}");
             Console.SetCursorPosition(3, 9);
@@ -229,22 +229,22 @@ namespace tortiki
                                             if (position == 0)
                                             {
                                                 value += sec_menu.price[0];
-                                                order += sec_menu.part[0] + ", ";
+                                                order += sec_menu.part[0] + "; ";
                                             }
                                             else if (position == 1)
                                             {
                                                 value += sec_menu.price[1];
-                                                order += sec_menu.part[1] + ", ";
+                                                order += sec_menu.part[1] + "; ";
                                             }
                                             else if (position == 2)
                                             {
                                                 value += sec_menu.price[2];
-                                                order += sec_menu.part[2] + ", ";
+                                                order += sec_menu.part[2] + "; ";
                                             }
                                             else if (position == 3)
                                             {
                                                 value += sec_menu.price[3];
-                                                order += sec_menu.part[3] + ", ";
+                                                order += sec_menu.part[3] + "; ";
                                             }
                                             break;
                                     }
@@ -269,15 +269,16 @@ namespace tortiki
         static void OrderOut(string order, int amount)
         {
             string ordertext = $"\nЗаказ от {DateTime.Now}\n" + $"\tЗаказ: {order}\n\tЦена: {amount} рублей";
-            if (File.Exists("C:\\Users\\Igor\\Desktop\\Заказ.txt"))
+            string path = "C:\\Users\\Igor\\Desktop\\Заказ.txt";
+            if (File.Exists(path))
             {
-                File.AppendAllText("C:\\Users\\Igor\\Desktop\\Заказ.txt", ordertext);
+                File.AppendAllText(path, ordertext);
             }
             else
             {
-                var bill = File.Create("C:\\Users\\Igor\\Desktop\\Заказ.txt");
-                bill.Close();
-                File.AppendAllText("C:\\Users\\Igor\\Desktop\\Заказ.txt", ordertext);
+                var text = File.Create(path);
+                text.Close();
+                File.WriteAllText(path, ordertext);
             };
         }
     }
