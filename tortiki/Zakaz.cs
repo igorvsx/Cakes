@@ -8,6 +8,8 @@ namespace tortiki
 {
     internal class Zakaz
     {
+        public string[] part;
+        public int[] price;
 
     }
 }
