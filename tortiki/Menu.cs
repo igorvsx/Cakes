@@ -10,9 +10,9 @@ namespace tortiki
 {
     internal class Menu
     {
-        static void OtherMenu(int position, int value, string order)
+        private static void OtherMenu(int position, int value, string order)
         {
-            int point = 0;
+            int marker = 0;
             string[] othermenu = new[] { "Форма торта", "Размер торта", "Вкус коржей",
                 "Количество коржей", "Глазурь", "Декор", "Конец заказа" };
             Console.SetCursorPosition(0, position);
@@ -20,25 +20,25 @@ namespace tortiki
 
             foreach (string item in othermenu)
             {
-                Console.SetCursorPosition(3, point);
+                Console.SetCursorPosition(2, marker);
                 Console.WriteLine(item);
-                point++;
+                marker++;
             }
-            Console.WriteLine("-----------------------");
-            Console.SetCursorPosition(3, 8);
-            Console.WriteLine($"Сумма заказа: {value}");
-            Console.SetCursorPosition(3, 9);
-            Console.WriteLine($"Ваш заказ: {order}");
+            Console.WriteLine("");
+            Console.SetCursorPosition(2, 8);
+            Console.WriteLine($"Сумма: {value}");
+            Console.SetCursorPosition(2, 9);
+            Console.WriteLine($"Ваш торт: {order}");
         }
-        static void DopMenu(Zakaz menu, int position)
+        private static void DopMenu(Zakaz menu, int position)
         {
-            Console.SetCursorPosition(3, 0);
+            Console.SetCursorPosition(2, 0);
             Console.WriteLine(menu.part[0]);
-            Console.SetCursorPosition(3, 1);
+            Console.SetCursorPosition(2, 1);
             Console.WriteLine(menu.part[1]);
-            Console.SetCursorPosition(3, 2);
+            Console.SetCursorPosition(2, 2);
             Console.WriteLine(menu.part[2]);
-            Console.SetCursorPosition(3, 3);
+            Console.SetCursorPosition(2, 3);
             Console.WriteLine(menu.part[3]);
             Console.SetCursorPosition(0, position);
             Console.WriteLine("->");
@@ -224,7 +224,7 @@ namespace tortiki
                                             }
                                             break;
                                         case ConsoleKey.Enter:
-                                            Console.SetCursorPosition(1, 5);
+                                            Console.SetCursorPosition(0, 5);
                                             Console.WriteLine("Успешно добавлено");
                                             if (position == 0)
                                             {
@@ -266,7 +266,7 @@ namespace tortiki
                 }
             }
         }
-        static void OrderOut(string order, int amount)
+        private static void OrderOut(string order, int amount)
         {
             string ordertext = $"\nЗаказ от {DateTime.Now}\n" + $"\tЗаказ: {order}\n\tЦена: {amount} рублей";
             string path = "C:\\Users\\Igor\\Desktop\\Заказ.txt";
